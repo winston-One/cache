@@ -15,6 +15,8 @@ import org.springframework.cache.annotation.EnableCaching;
 public class CacheApplication {
 
     public static void main(String[] args) {
+        //增加信息 变成新的版本
+        System.out.println("我是修改后的版本信息");
         SpringApplication.run(CacheApplication.class, args);
     }
 
