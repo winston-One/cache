@@ -1,0 +1,54 @@
+#应用服务 WEB 访问端口
+server:
+  port: 8080
+# 数据库驱动：
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/managementsystem?serverTimezone=UTC
+    password: 123456
+#使用ehcache的缓存
+  cache:
+    type: ehcache
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: tbl_
+      id-type: auto
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+memcached:
+  servers: localhost:11211
+  pooliSize: 10
+  opTimeout: 3000
+
+jetcache:
+#每过一分钟给控制台上显示统计数据
+  statIntervalMinutes: 1
+  local:
+    default:
+      type: linkedhashmap
+#类型转换器，转成key的类型，避免把对象作为了key 使用的工具是fastjson
+      keyConvertor: fastjson
+
+  remote:
+    default:
+      type: redis
+      host: localhost
+      port: 6379
+      valueEncode: java
+      valueDecode: java
+#不设置可能报空指针异常
+      keyConvertor: fastjson
+      poolConfig:
+#最大连接数 可以只配远程不配本地
+        maxTotal: 50
+    sms:
+      type: redis
+      host: localhost
+      port: 6379
+      poolConfig:
+        #最大连接数 可以只配远程不配本地
+        maxTotal: 50
